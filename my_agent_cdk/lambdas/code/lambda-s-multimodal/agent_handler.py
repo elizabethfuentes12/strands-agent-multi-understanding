@@ -95,4 +95,4 @@ def handler(event: Dict[str, Any], _context) -> str:
         return str(result_agent.message['content'][0]['text'])
     
     except:
-        return str("Error al procesar el video")
+        return str("Error")

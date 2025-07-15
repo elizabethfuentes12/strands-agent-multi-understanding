@@ -1,24 +1,29 @@
-# AWS CDK Lambda Deployment Example (Python)
+# AWS CDK Multi-Modal Agent Deployment
 
 ## Introduction
 
-This is a Python-based CDK (Cloud Development Kit) example that demonstrates how to deploy a Python function to AWS Lambda. The example deploys a weather forecaster application that requires AWS authentication to invoke the Lambda function.
+This is a Python-based CDK (Cloud Development Kit) project that demonstrates how to deploy serverless Lambda functions implementing the Strands Agent framework. The project includes two Lambda functions:
 
-This is the Python version of the TypeScript CDK stack found in the parent directory.
+1. **Weather Forecasting Agent** - A simple agent that provides weather forecasting capabilities
+2. **Multi-Modal Processing Agent** - An advanced agent that can process and analyze different types of media (images, documents, videos)
 
 ## Prerequisites
 
 - [AWS CLI](https://aws.amazon.com/cli/) installed and configured
 - Python 3.8 or later
 - [jq](https://stedolan.github.io/jq/) (optional) for formatting JSON output
+- AWS account with Bedrock access
 
 ## Project Structure
 
 - `agent_lambda/` - Contains the CDK stack definition in Python
 - `app.py` - Main CDK application entry point
-- `package_for_lambda.py` - Python script that packages Lambda code and dependencies into deployment archives
-- `lambda/` - Contains the Python Lambda function code
-- `packaging/` - Directory used to store Lambda deployment assets and dependencies
+- `layers/` - Contains Lambda layers for the Strands Agent framework
+  - `package_for_lambda.py` - Python script that packages Lambda code and dependencies into deployment archives
+  - `lambda_requirements.txt` - Dependencies for the Lambda functions
+- `lambdas/code/` - Contains the Lambda function code
+  - `lambda-s-agent/` - Weather forecasting agent Lambda function
+  - `lambda-s-multimodal/` - Multi-modal processing agent Lambda function
 
 ## Setup and Deployment
 
@@ -36,7 +41,7 @@ pip install -r requirements.txt
 pip install -r layers/lambda_requirements.txt --python-version 3.12 --platform manylinux2014_aarch64 --target layers/strands/_dependencies --only-binary=:all:
 ```
 
-2. Package the lambda:
+2. Package the lambda layers:
 
 ```bash
 python layers/package_for_lambda.py
@@ -48,7 +53,7 @@ python layers/package_for_lambda.py
 cdk bootstrap
 ```
 
-4. Deploy the lambda:
+4. Deploy the stack:
 
 ```bash
 cdk deploy
@@ -56,13 +61,25 @@ cdk deploy
 
 ## Usage
 
-After deployment, you can invoke the Lambda function using the AWS CLI or AWS Console. The function requires proper AWS authentication to be invoked.
+After deployment, you can invoke the Lambda functions using the AWS CLI or AWS Console.
+
+### Weather Forecasting Agent
 
 ```bash
 aws lambda invoke --function-name AgentSFunction \
       --region us-east-2 \
       --cli-binary-format raw-in-base64-out \
       --payload '{"prompt": "What is the weather in New York?"}' \
+      output.json
+```
+
+### Multi-Modal Processing Agent
+
+```bash
+aws lambda invoke --function-name MultimodalSFunction \
+      --region us-east-2 \
+      --cli-binary-format raw-in-base64-out \
+      --payload '{"prompt": "Analyze this image", "s3object": "s3://your-bucket/path/to/image.jpg"}' \
       output.json
 ```
 
@@ -74,6 +91,16 @@ jq -r '.' ./output.json
 
 Otherwise, open output.json to view the result.
 
+## Multi-Modal Processing Capabilities
+
+The Multi-Modal Processing Agent can handle various types of media:
+
+- **Images**: PNG, JPEG/JPG, GIF, WebP
+- **Documents**: PDF, CSV, DOCX, XLS, XLSX
+- **Videos**: MP4, MOV, AVI, MKV, WebM
+
+The agent uses custom tools built with the Strands Agent framework to process and analyze these media types.
+
 ## Cleanup
 
 To remove all resources created by this example:
@@ -82,16 +109,9 @@ To remove all resources created by this example:
 cdk destroy
 ```
 
-## Key Differences from TypeScript Version
-
-- Uses Python CDK constructs instead of TypeScript
-- Main entry point is `app.py` instead of `bin/cdk-app.ts`
-- Stack definition is in `agent_lambda/agent_lambda_stack.py`
-- Uses Python naming conventions (snake_case instead of camelCase)
-- Dependencies managed via `requirements.txt` instead of `package.json`
-
 ## Additional Resources
 
 - [AWS CDK Python Documentation](https://docs.aws.amazon.com/cdk/latest/guide/work-with-cdk-python.html)
 - [AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
-- [Python CDK API Reference](https://docs.aws.amazon.com/cdk/api/v2/python/)
+- [AWS Bedrock Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
+- [Strands Agent Framework Documentation](https://github.com/aws-samples/strands-framework)

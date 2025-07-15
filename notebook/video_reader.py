@@ -8,7 +8,8 @@ from typing import Dict, Any, Optional
 def video_reader(
     video_path: str, 
     text_prompt: str = "Describe what you see in this video",
-    model_id: Optional[str] = None,
+    #model_id: Optional[str] = None,
+    model_id: str = "us.amazon.nova-pro-v1:0",
     region: Optional[str] = None,
     s3_bucket: Optional[str] = None,
     system_prompt: Optional[str] = None,

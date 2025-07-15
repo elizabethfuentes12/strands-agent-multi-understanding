@@ -4,9 +4,10 @@ This directory contains notebooks and supporting files for demonstrating multi-m
 
 ## Contents
 
-- `multi-undestanding.ipynb` - Main notebook demonstrating how to process and analyze different types of media (images, documents, videos)
+- `multi-understanding.ipynb` - Main notebook demonstrating how to process and analyze different types of media (images, documents, videos)
 - `video_reader.py` - Custom tool implementation for video processing
 - `requirements.txt` - Required Python packages for running the notebooks
+- `data-sample/` - Directory containing sample files for testing
 
 ## Getting Started
 
@@ -23,16 +24,11 @@ This directory contains notebooks and supporting files for demonstrating multi-m
 
 3. Configure AWS credentials for Bedrock access
 
-4. Launch Jupyter Notebook:
-   ```
-   jupyter notebook
-   ```
-
-5. Open `multi-undestanding.ipynb` to see the multi-modal agent in action
+4. Open `multi-understanding.ipynb` to see the multi-modal agent in action
 
 ## Notebook Overview
 
-The `multi-undestanding.ipynb` notebook demonstrates:
+The `multi-understanding.ipynb` notebook demonstrates:
 
 1. Setting up a Strands Agent with multi-modal capabilities
 2. Configuring AWS Bedrock for model inference
@@ -44,10 +40,12 @@ The `multi-undestanding.ipynb` notebook demonstrates:
 
 ## Sample Files
 
-The directory includes sample files for testing:
-- `Ninas.jpeg` - Sample image file
-- `i-94-Enrique_mama.pdf` - Sample PDF document
+The `data-sample/` directory includes sample files for testing:
+- `diagram.jpg` - Sample image file for image analysis
+- `Welcome-Strands-Agents-SDK.pdf` - Sample PDF document for text extraction
+- `Prompt-Engineering.pdf` - Sample PDF document for content analysis
+- `moderation-video.mp4` - Sample video file for video frame extraction and analysis
 
 ## Video Reader Tool
 
-The `video_reader.py` file implements a custom tool for processing video content. It extracts frames from videos and provides descriptions of the content.
+The `video_reader.py` file implements a custom tool for processing video content. It extracts frames from videos at specified intervals, converts them to base64-encoded images, and provides them to the agent for analysis. This enables the agent to understand and describe video content by analyzing key frames throughout the video.

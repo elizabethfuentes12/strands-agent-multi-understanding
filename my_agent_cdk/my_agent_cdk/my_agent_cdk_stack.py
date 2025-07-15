@@ -12,7 +12,7 @@ from constructs import Construct
 from lambdas.code.project_lambdas import Lambdas
 from s3_cloudfront import S3Deploy
 BucketKeyName = "my-1-strands-agents-"
-_model_id = "us.amazon.nova-pro-v1:0"
+_model_id = "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
 BucketSampleContent = "image"
 
 

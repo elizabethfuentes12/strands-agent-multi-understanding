@@ -21,8 +21,9 @@ This repository contains tools and examples for building AI agents capable of un
 ## Repository Structure
 
 - `/notebook/` - Contains Jupyter notebooks with implementation examples
-  - `multi-undestanding.ipynb` - Main notebook demonstrating multi-modal capabilities
+  - `multi-understanding.ipynb` - Main notebook demonstrating multi-modal capabilities
   - `video_reader.py` - Custom tool for video processing
+  - `data-sample/` - Directory containing sample files for testing
 - `/my_agent_cdk/` - AWS CDK application for deploying Lambda functions
   - `lambdas/code/lambda-s-agent` - Weather forecasting agent Lambda function
   - `lambdas/code/lambda-s-multimodal` - Multi-modal processing agent Lambda function
@@ -109,10 +110,20 @@ agent = Agent(
 response = agent.process("Analyze this image: path/to/image.jpg")
 ```
 
+---
+
+**🇻🇪🇨🇱 ¡Gracias!**
+
+**Best,**
+
+[Eli](https://www.linkedin.com/in/lizfue/)
+
+---
+
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
 ## License
 
-[Specify your license information here]
-
-## Contributing
-
-[Add contribution guidelines if applicable]
+This library is licensed under the MIT-0 License. See the LICENSE file.
