@@ -32,14 +32,14 @@ class MyAgentCdkStack(Stack):
 
         Fn.weather_function.add_to_role_policy(
             iam.PolicyStatement( 
-                actions=["bedrock:InvokeAgent","bedrock:InvokeModelWithResponseStream"], 
+                actions=["bedrock:InvokeAgent","bedrock:InvokeModelWithResponseStream","bedrock:InvokeModel"], 
                 resources=[f"*"]
                 )
                 )
         
         Fn.multimodal_function.add_to_role_policy(
             iam.PolicyStatement( 
-                actions=["bedrock:InvokeAgent","bedrock:InvokeModelWithResponseStream"], 
+                actions=["bedrock:InvokeAgent","bedrock:InvokeModelWithResponseStream","bedrock:InvokeModel"], 
                 resources=[f"*"]
                 )
                 )
